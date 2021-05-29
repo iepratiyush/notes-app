@@ -8,6 +8,11 @@
     height: calc(100vh - 64px);
   }
 }
+
+.frame-toolbar-title {
+  cursor: pointer;
+}
+
 .menu-button {
   text-transform: capitalize;
 }

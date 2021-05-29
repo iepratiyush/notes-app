@@ -1,1 +1,6 @@
-<p>home-component works!</p>
+<ngx-auth-firebaseui 
+    [providers]="[ providers.Google]"
+    (onSuccess)="success($event)"
+    (onError)="error($event)"
+>
+</ngx-auth-firebaseui>

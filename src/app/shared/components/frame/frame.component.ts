@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-frame',
@@ -13,7 +14,11 @@ export class FrameComponent implements OnInit {
   isDark = true;
   isHandset = false;
 
-  constructor(private overlayContainer: OverlayContainer, private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private overlayContainer: OverlayContainer, 
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
+  ) {
     breakpointObserver.observe([
       Breakpoints.Handset
     ]).subscribe(result => {
@@ -38,4 +43,12 @@ export class FrameComponent implements OnInit {
     }
   }
 
+  signOut() {
+    this.router.navigate(['/', 'home']);
+  }
+
+  accountDeleted() {
+    this.router.navigate(['/', 'home']);
+  }
+  
 }

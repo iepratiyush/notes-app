@@ -4,6 +4,7 @@ import { MaterialModule } from '../material/material.module';
 import { FrameComponent } from './components/frame/frame.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,13 +14,15 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
     CommonModule,
     MaterialModule,
     AngularFirestoreModule,
-    NgxAuthFirebaseUIModule
+    NgxAuthFirebaseUIModule,
+    AppRoutingModule,
   ],
   exports: [
     FrameComponent,
     MaterialModule,
     AngularFirestoreModule,
-    NgxAuthFirebaseUIModule
+    NgxAuthFirebaseUIModule,
+    AppRoutingModule,
   ]
 })
 export class SharedModule { }
