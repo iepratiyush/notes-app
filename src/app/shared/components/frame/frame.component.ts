@@ -12,6 +12,7 @@ export class FrameComponent implements OnInit {
   themeColor: 'primary' | 'accent' = 'primary';
   isDark = true;
   isHandset = false;
+
   constructor(private overlayContainer: OverlayContainer, private breakpointObserver: BreakpointObserver) {
     breakpointObserver.observe([
       Breakpoints.Handset

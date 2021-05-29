@@ -1,3 +1,8 @@
 <app-frame>
-  <router-outlet></router-outlet>
+  <ngx-auth-firebaseui 
+        [providers]="[ providers.Google]"
+        (onSuccess)="printUser($event)"
+        (onError)="printError($event)"
+    >
+  </ngx-auth-firebaseui>
 </app-frame>
