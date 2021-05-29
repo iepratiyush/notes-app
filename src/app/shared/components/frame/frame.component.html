@@ -1,0 +1,55 @@
+<div [class.dark-theme]="isDark">
+    <mat-toolbar [color]="themeColor">
+        <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+        <span>Notes</span>
+        <span class="frame-toolbar-spacer"></span>
+
+        <button mat-icon-button (click)="toggleTheme()" [matTooltip]="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+        <mat-icon matTooltip="">
+            brightness_6
+        </mat-icon>
+        </button>
+        
+        <button mat-button [matMenuTriggerFor]="menu" class="menu-button" matTooltip="Select a theme color">
+            {{ themeColor }}
+        </button>
+        
+        <ng-template #noRadio>
+        radio_button_unchecked
+        </ng-template>
+        
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="themeColor = 'primary'">
+                <mat-icon [color]="themeColor === 'primary' ? 'primary' : 'no-color'">
+                <ng-container *ngIf="themeColor === 'primary'; else noRadio">radio_button_checked</ng-container>
+                </mat-icon>
+                Primary
+            </button>
+            <button mat-menu-item (click)="themeColor = 'accent'">
+                <mat-icon [color]="themeColor === 'accent' ? 'accent' : 'no-color'">
+                <ng-container *ngIf="themeColor === 'accent'; else noRadio">radio_button_checked</ng-container>
+                </mat-icon>
+                Accent
+            </button>
+        </mat-menu>
+        
+    </mat-toolbar>
+    <mat-sidenav-container class="frame-sidenav-container">
+        
+        <mat-sidenav #sidenav [mode]="isHandset ? 'over' : 'side'" [fixedInViewport]="isHandset" fixedTopGap="56">
+            <div class="frame-profile">
+                <img class="frame-avatar" src="https://firebasestorage.googleapis.com/v0/b/notes-app-9c677.appspot.com/o/profile%2Fprofile.jpg?alt=media&token=0e4088f1-2fc5-477e-b148-5d4791abbe2e"/>
+                <span class="frame-title mat-title">Pratiyush Prakash</span>
+                <span class="frame-bio mat-caption">Work Mode!!</span>
+            </div>
+        </mat-sidenav>
+        
+        <mat-sidenav-content>
+            
+            <ng-content></ng-content>
+            
+        </mat-sidenav-content>
+        
+    </mat-sidenav-container>
+</div>
+  

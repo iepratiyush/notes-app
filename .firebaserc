@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "notes-app-9c677": {
+      "hosting": {
+        "notes-app": [
+          "notes-app-9c677"
+        ]
+      }
+    }
+  }
+}
