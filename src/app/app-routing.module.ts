@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoggedInGuard } from 'ngx-auth-firebaseui';
-import { HomeComponent } from './components/home-component/home.component';
+import { HomeComponent } from './shared/components/home-component/home.component';
 
 const routes: Routes = [
   {

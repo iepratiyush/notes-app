@@ -10,14 +10,14 @@ import { Router } from '@angular/router';
 })
 export class FrameComponent implements OnInit {
 
-  themeColor: 'primary' | 'accent' = 'primary';
   isDark = true;
   isHandset = false;
+  appName = 'Notes';
 
   constructor(
     private overlayContainer: OverlayContainer, 
     private breakpointObserver: BreakpointObserver,
-    private router: Router
+    private router: Router,
   ) {
     breakpointObserver.observe([
       Breakpoints.Handset
@@ -30,7 +30,8 @@ export class FrameComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   toggleTheme(): void {
     this.isDark = !this.isDark;

@@ -1,1 +1,17 @@
-<p>secured works!</p>
+<mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">checklist_rtl</mat-icon>
+            To-do List
+        </ng-template>
+        <app-to-do-list></app-to-do-list>
+    </mat-tab>
+    
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">notes</mat-icon>
+            Notes
+        </ng-template>
+        <app-notes></app-notes>
+    </mat-tab>
+</mat-tab-group>

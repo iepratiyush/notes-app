@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   exports: [
@@ -25,7 +27,9 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatMenuModule,
     MatBadgeModule,
     MatListModule,
-    LayoutModule
+    LayoutModule,
+    MatCardModule,
+    MatTabsModule
   ],
 })
 export class MaterialModule { }

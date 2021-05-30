@@ -1,37 +1,14 @@
 <div [class.dark-theme]="isDark">
-    <mat-toolbar [color]="themeColor">
+    <mat-toolbar [color]="'accent'">
         <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-        <span [routerLink]="['/', 'secured']" class="frame-toolbar-title">Notes</span>
+        <span [routerLink]="['/', 'secured']" class="frame-toolbar-title">{{appName}}</span>
         <span class="frame-toolbar-spacer"></span>
 
         <button mat-icon-button (click)="toggleTheme()" [matTooltip]="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
-        <mat-icon matTooltip="">
-            brightness_6
-        </mat-icon>
+            <mat-icon [color]="isDark ? 'yellow': '#324880'">
+                {{isDark ? 'brightness_5' : 'bedtime'}}
+            </mat-icon>
         </button>
-        
-        <button mat-button [matMenuTriggerFor]="menu" class="menu-button" matTooltip="Select a theme color">
-            {{ themeColor }}
-        </button>
-        
-        <ng-template #noRadio>
-        radio_button_unchecked
-        </ng-template>
-        
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="themeColor = 'primary'">
-                <mat-icon [color]="themeColor === 'primary' ? 'primary' : 'no-color'">
-                <ng-container *ngIf="themeColor === 'primary'; else noRadio">radio_button_checked</ng-container>
-                </mat-icon>
-                Primary
-            </button>
-            <button mat-menu-item (click)="themeColor = 'accent'">
-                <mat-icon [color]="themeColor === 'accent' ? 'accent' : 'no-color'">
-                <ng-container *ngIf="themeColor === 'accent'; else noRadio">radio_button_checked</ng-container>
-                </mat-icon>
-                Accent
-            </button>
-        </mat-menu>
         
     </mat-toolbar>
     <mat-sidenav-container class="frame-sidenav-container">
