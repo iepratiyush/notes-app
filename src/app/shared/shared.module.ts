@@ -9,6 +9,7 @@ import { ToDoCardComponent } from './components/to-do-card/to-do-card.component'
 import { HomeComponent } from './components/home-component/home.component';
 import { NotesComponent } from './components/notes/notes.component';
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,8 @@ import { ToDoListComponent } from './components/to-do-list/to-do-list.component'
     AngularFirestoreModule,
     NgxAuthFirebaseUIModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MaterialModule,
@@ -35,7 +38,9 @@ import { ToDoListComponent } from './components/to-do-list/to-do-list.component'
     HomeComponent,
     NotesComponent,
     ToDoCardComponent,
-    ToDoListComponent
+    ToDoListComponent,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

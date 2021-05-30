@@ -13,6 +13,10 @@ import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   exports: [
@@ -29,7 +33,11 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatListModule,
     LayoutModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    DragDropModule,
+    MatFormFieldModule,
+    MatButtonToggleModule,
+    MatInputModule
   ],
 })
 export class MaterialModule { }

@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ColorService } from '../../services/color.service';
 
 @Component({
   selector: 'app-frame',
@@ -18,6 +19,7 @@ export class FrameComponent implements OnInit {
     private overlayContainer: OverlayContainer, 
     private breakpointObserver: BreakpointObserver,
     private router: Router,
+    private colorService: ColorService
   ) {
     breakpointObserver.observe([
       Breakpoints.Handset
@@ -35,6 +37,7 @@ export class FrameComponent implements OnInit {
 
   toggleTheme(): void {
     this.isDark = !this.isDark;
+    this.colorService.setProfileObs(this.isDark);
     if (this.isDark) {
       this.overlayContainer.getContainerElement().classList.add('dark-theme');
     } else {

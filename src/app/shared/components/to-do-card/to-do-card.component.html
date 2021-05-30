@@ -1,15 +1,16 @@
-<mat-card class="to-do-card">
+<mat-card class="to-do-card" *ngIf="todoCard" [ngStyle]="{'background-color': colorHexCode}">
     <mat-card-content>
-        <p>
-            {{text}}
-        </p>
+        <span class="mat-title">{{todoCard.text}}</span>
     </mat-card-content>
-    <mat-card-actions>
-        <button mat-icon-button color="primary" aria-label="Edit to-do item">
-            <mat-icon>mode_edit</mat-icon>
+    <mat-card-actions align="end">
+        <button mat-icon-button aria-label="Done" *ngIf="isTodo" (click)="onDone()">
+            <mat-icon>done</mat-icon>
         </button>
-        <button mat-icon-button color="primary" aria-label="Delete to-do item">
-            <mat-icon>delete</mat-icon>
+        <button mat-icon-button aria-label="Edit" (click)="onEdit()">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" aria-label="Delete" (click)="onDelete()">
+            <mat-icon>clear</mat-icon>
         </button>
     </mat-card-actions>
 </mat-card>
