@@ -7,18 +7,26 @@ import { RouterModule } from '@angular/router';
 import { FrameComponent } from './components/frame/frame.component';
 import { ToDoCardComponent } from './components/to-do-card/to-do-card.component';
 import { HomeComponent } from './components/home-component/home.component';
-import { NotesComponent } from './components/notes/notes.component';
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { NewToDoMobileDialogComponent } from './components/new-to-do-mobile-dialog/new-to-do-mobile-dialog.component';
+import { NoteCardComponent } from './components/note-card/note-card.component';
+import { NoteListComponent } from './components/note-list/note-list.component';
+import { NewNoteMobileDialogComponent } from './components/new-note-mobile-dialog/new-note-mobile-dialog.component';
 
 @NgModule({
   declarations: [
     FrameComponent,
     ToDoCardComponent,
     HomeComponent,
-    NotesComponent,
     ToDoCardComponent,
-    ToDoListComponent
+    ToDoListComponent,
+    EditDialogComponent,
+    NewToDoMobileDialogComponent,
+    NoteCardComponent,
+    NoteListComponent,
+    NewNoteMobileDialogComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +37,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
+  entryComponents: [
+    EditDialogComponent,
+    NewToDoMobileDialogComponent,
+    NewNoteMobileDialogComponent,
+  ],
   exports: [
     MaterialModule,
     AngularFirestoreModule,
@@ -36,9 +49,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FrameComponent,
     ToDoCardComponent,
     HomeComponent,
-    NotesComponent,
     ToDoCardComponent,
     ToDoListComponent,
+    NoteListComponent,
     FormsModule,
     ReactiveFormsModule
   ]

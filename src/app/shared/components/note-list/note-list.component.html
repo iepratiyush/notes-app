@@ -1,0 +1,34 @@
+<div class="note-list-main-container">
+    <div class="note-list-new-container" *ngIf="!isHandset">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>New note</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="newNoteForm">
+                    <mat-form-field appearance="fill" [color]="'primary'" class="note-list-new-form">
+                        <mat-label>Title</mat-label>
+                        <input matInput type="text" placeholder="Type your title here..." formControlName="title" autocomplete="off">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" [color]="'primary'" class="note-list-new-form" >
+                        <mat-label>Text</mat-label>
+                        <textarea matInput placeholder="Type your note here..." formControlName="note"></textarea>
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" class="note-list-new-btn" (click)="onCreateDesktop()">Create</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="note-list-container">
+        <app-note-card class="to-do-card" *ngFor="let note of notes; let i = index" 
+            [note]="note" 
+            (delete)="onDelete(note.key)"
+        ></app-note-card>
+    </div>
+</div>
+
+<button mat-fab color="primary" aria-label="Add new To Do" class="note-list-new-btn-mobile" *ngIf="isHandset" (click)="onCreateMobile()">
+    <mat-icon>add</mat-icon>
+</button>

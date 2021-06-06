@@ -1,18 +1,16 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Todo }  from '../../shared.interface';
+import { Note } from '../../shared.interface';
 
 @Component({
-  selector: 'app-to-do-card',
-  templateUrl: './to-do-card.component.html',
-  styleUrls: ['./to-do-card.component.scss']
+  selector: 'app-note-card',
+  templateUrl: './note-card.component.html',
+  styleUrls: ['./note-card.component.scss']
 })
-export class ToDoCardComponent implements OnInit {
-  @Input() todo!: Todo;
-  @Input() colorHexCode: string = '';
+export class NoteCardComponent implements OnInit {
+  @Input() note!: Note;
 
   @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() done: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
 
   isHandset = false;
@@ -34,10 +32,6 @@ export class ToDoCardComponent implements OnInit {
 
   onEdit() {
     this.edit.emit();
-  }
-
-  onDone() {
-    this.done.emit();
   }
   
   onDelete() {

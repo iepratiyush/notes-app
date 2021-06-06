@@ -1,8 +1,11 @@
-export interface IHS {
-    [propName: string]: any;
+export class Todo {
+    key?: string | null;
+    text?: string;
+    completed?: boolean;
 }
 
-export interface ToDoCard {
-    text: string;
-    color: string;
+export class Note {
+    key?: string | null;
+    title?: string;
+    text?: string;
 }

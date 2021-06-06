@@ -1,10 +1,14 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
-import { COLOR_MAP_DARK, COLOR_MAP_LIGHT, DONE_CARD, TO_DO_CARD } from '../../shared.constants';
-import { ToDoCard } from '../../shared.interface';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { COLORS } from '../../shared.constants';
 import { FormBuilder } from '@angular/forms';
-import { ColorService } from '../../services/color.service';
+import { ToDoFirebaseService } from '../../services/to-do-firebase.service';
+import { map } from 'rxjs/operators';
+import { Todo }  from '../../shared.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { NewToDoMobileDialogComponent } from '../new-to-do-mobile-dialog/new-to-do-mobile-dialog.component';
 
 @Component({
   selector: 'app-to-do-list',
@@ -12,18 +16,21 @@ import { ColorService } from '../../services/color.service';
   styleUrls: ['./to-do-list.component.scss']
 })
 export class ToDoListComponent implements OnInit {
-  todo: ToDoCard[] = [];
-  done: ToDoCard[] = [];
-  colorOptionsMap: any;
-  colorOptionsKeys: string[] = [];
+  todos?: Todo[];
   isHandset = false;
 
-  newNoteForm = this.fb.group({
+  newTodoForm = this.fb.group({
     text: [''],
-    color: [''],
   });
 
-  constructor(breakpointObserver: BreakpointObserver, private fb: FormBuilder, colorService: ColorService) { 
+  constructor(
+    breakpointObserver: BreakpointObserver, 
+    private fb: FormBuilder, 
+    private changeDetection: ChangeDetectorRef,
+    private todoFirebaseService: ToDoFirebaseService,
+    private _snackBar: MatSnackBar,
+    private _dialog: MatDialog,
+  ) { 
     breakpointObserver.observe([
       Breakpoints.Handset
     ]).subscribe(result => {
@@ -33,29 +40,86 @@ export class ToDoListComponent implements OnInit {
         this.isHandset = false;
       }
     });
-
-    colorService.getProfileObs().subscribe(isDark => {
-      this.colorOptionsMap = isDark ? COLOR_MAP_DARK : COLOR_MAP_LIGHT;
-      this.colorOptionsKeys = Object.keys(this.colorOptionsMap);
-    })
-    
   }
 
   ngOnInit(): void {
-    this.todo = [...TO_DO_CARD];
-    this.done = [...DONE_CARD];
+    this.todoFirebaseService.getReady().subscribe(value => {
+      if (value) {
+        this.retrieveTodos();
+      }
+    })
   }
 
-  drop(event: CdkDragDrop<ToDoCard[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+  retrieveTodos(): void {
+    if (this.todoFirebaseService.getAll()) {
+      this.todoFirebaseService.getAll().snapshotChanges().pipe(
+        map(changes =>
+          changes.map(c =>
+            ({ key: c.payload.key, ...c.payload.val() })
+          )
+        )
+      ).subscribe(data => {
+        this.todos = data;
+        console.log(this.todos);
+      });
     }
-    console.log(event);
+  }
+
+  onCreateDesktop(): void {
+    this._create(this.newTodoForm.get('text')?.value);
+  }
+
+  _create(text: string): void {
+    let todo = new Todo();
+    todo.text = text;
+    todo.completed = false;
+    this.todoFirebaseService.create(todo).then(() => {
+      this._snackBar.open('To do created!!', 'Dismiss', {duration: 3000});
+    })
+  }
+
+  getHexCode(i: number): string {
+    let index = i % 5;
+    return [...COLORS][index];
+  }
+
+  onEdit (key: any, text: any): void {
+    console.log(text);
+    const dialogRef = this._dialog.open(EditDialogComponent, {
+      width: '250px',
+      data: text
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result !== text)
+      this.todoFirebaseService.update(key, {text: result}).then(() => {
+        this._snackBar.open('To do edited!!', 'Dismiss', {duration: 3000});
+      });
+    });
+  }
+
+  onDone (key: any): void {
+    this.todoFirebaseService.update(key, {completed: true}).then(() => {
+      this._snackBar.open('To do completed!!', 'Dismiss', {duration: 3000});
+    });
+  }
+
+  onDelete (key: any): void {
+    this.todoFirebaseService.delete(key).then(() => {
+      this._snackBar.open('To do deleted!!', 'Dismiss', {duration: 3000});
+    });
+  }
+
+  onCreateMobile(): void {
+    const dialogRef = this._dialog.open(NewToDoMobileDialogComponent, {
+      width: '250px',
+      data: ''
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result !== '')
+      this._create(result);
+    });
   }
 
 }
