@@ -5,7 +5,13 @@
 
 .note-list-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.note-card {
+  flex: 1;
+  min-width: 400px;
 }
 
 .note-list-new-container {
@@ -17,8 +23,8 @@
 
 .note-list-new-btn-mobile {
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: 16px;
+  right: 8px;
 }
 
 .note-list-new-form {

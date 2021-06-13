@@ -1,9 +1,9 @@
 <mat-card class="note-card" *ngIf="note">
-    <mat-card-header>
-        <mat-card-title>{{note.title}}</mat-card-title>
+    <mat-card-header class="note-title" [ngStyle]="{'background-color': colorHexCode}">
+        <mat-card-title>{{note.title | titlecase}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <span >{{note.text}}</span>
+        <span class="note-content">{{note.text}}</span>
     </mat-card-content>
     <mat-card-actions [align]="isHandset ? 'start': 'end'">
         <button mat-icon-button color="warn" aria-label="Delete" (click)="onDelete()">

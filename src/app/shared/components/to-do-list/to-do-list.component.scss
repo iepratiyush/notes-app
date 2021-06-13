@@ -5,7 +5,13 @@
 
 .to-do-list-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.to-do-card {
+  flex: 1;
+  min-width: 400px;
 }
 
 .to-do-list-new-container {
@@ -17,8 +23,8 @@
 
 .to-do-list-new-btn-mobile {
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: 16px;
+  right: 8px;
 }
 
 .to-do-list-new-form {

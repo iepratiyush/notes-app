@@ -18,13 +18,11 @@ export class HomeComponent implements OnInit {
     this.afAuth.isLoggedIn().pipe(tap( user => {
       if (user) {
         this.router.navigate(['/', 'secured']);
-        console.log(user);
       }
     })).subscribe();
   }
 
   success(event: any) {
-    console.log(event);
     this.router.navigate(['/', 'secured']);
   }
 

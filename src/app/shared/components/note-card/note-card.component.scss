@@ -1,3 +1,23 @@
-.note-card {
-  padding: 8px 0px;
+:host {
+  padding: 8px;
+}
+
+.mat-card-header {
+  padding: 8px !important;
+}
+
+.mat-card {
+  padding: 0 !important;
+}
+
+.mat-card-content {
+  padding: 8px !important;
+}
+
+.mat-card-content {
+  padding: 8px !important;
+}
+
+.note-content {
+  font-family: cursive;
 }

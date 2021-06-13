@@ -1,8 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColorService } from '../../services/color.service';
+import Typed from 'typed.js';
 
 @Component({
   selector: 'app-frame',
@@ -13,13 +14,14 @@ export class FrameComponent implements OnInit {
 
   isDark = true;
   isHandset = false;
-  appName = 'Notes';
+  appName = 'Notes App';
 
   constructor(
     private overlayContainer: OverlayContainer, 
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private colorService: ColorService
+    private colorService: ColorService,
+    private cdr: ChangeDetectorRef
   ) {
     breakpointObserver.observe([
       Breakpoints.Handset
@@ -53,6 +55,10 @@ export class FrameComponent implements OnInit {
 
   accountDeleted() {
     this.router.navigate(['/', 'home']);
+  }
+
+  titleClick(): void {
+    this.router.navigate(['/', 'secured']);
   }
   
 }

@@ -20,22 +20,3 @@
 .frame-toolbar-spacer {
   flex: 1 1 auto;
 }
-
-.mat-icon-no-color {
-  color: rbga(0, 0, 0, 0.54);
-}
-
-.frame-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.frame-avatar {
-  border-radius: 50%;
-}
-
-.frame-title,
-.frame-bio {
-  margin-top: 4px;
-}

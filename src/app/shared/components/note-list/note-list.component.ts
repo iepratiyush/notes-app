@@ -1,12 +1,13 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Note }  from '../../shared.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { NotesFirebaseService } from '../../services/notes-firebase.service';
 import { NewNoteMobileDialogComponent } from '../new-note-mobile-dialog/new-note-mobile-dialog.component';
+import { COLORS } from '../../shared.constants';
 
 @Component({
   selector: 'app-note-list',
@@ -19,8 +20,8 @@ export class NoteListComponent implements OnInit {
   isHandset = false;
 
   newNoteForm = this.fb.group({
-    title: [''],
-    note: [''],
+    title: ['', Validators.compose([Validators.minLength(3), Validators.required])],
+    note: ['', Validators.compose([Validators.minLength(3), Validators.required])],
   });
 
   constructor(
@@ -48,6 +49,10 @@ export class NoteListComponent implements OnInit {
         this.retrieveTodos();
       }
     })
+
+    this.newNoteForm.valueChanges.subscribe(() => {
+      console.log(this.newNoteForm);
+    })
   }
 
   retrieveTodos(): void {
@@ -60,13 +65,17 @@ export class NoteListComponent implements OnInit {
         )
       ).subscribe(data => {
         this.notes = data;
-        console.log(this.notes);
       });
     }
   }
 
   onCreateDesktop(): void {
     this._create(this.newNoteForm.get('title')?.value, this.newNoteForm.get('note')?.value);
+  }
+
+  getHexCode(i: number): string {
+    let index = i % 5;
+    return [...COLORS][index];
   }
 
   _create(title: string, text: string): void {

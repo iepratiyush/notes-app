@@ -2,14 +2,35 @@
 <div mat-dialog-content>
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input type="text" placeholder="Type your title here..." matInput [(ngModel)]="data.title">
+    <input 
+      type="text" 
+      placeholder="Type your title here..." 
+      matInput 
+      [(ngModel)]="data.title" 
+      name="title" 
+      autocomplete="off"
+      required minlength="3"
+      #title="ngModel"
+    >
+    <mat-error *ngIf="title?.errors?.required">Title is required</mat-error>
+    <mat-error *ngIf="title?.errors?.minlength">Title must be at least 3 character long</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Text</mat-label>
-    <textarea placeholder="Type your note here..." matInput [(ngModel)]="data.text"></textarea>
+    <textarea 
+      placeholder="Type your note here..." 
+      matInput 
+      [(ngModel)]="data.text"
+      name="text" 
+      autocomplete="off"
+      required minlength="3"
+      #text="ngModel"
+    ></textarea>
+    <mat-error *ngIf="text?.errors?.required">Note is required</mat-error>
+    <mat-error *ngIf="text?.errors?.minlength">Note must be at least 3 character long</mat-error>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="!(text.errors === null && title.errors === null)">Create</button>
 </div>

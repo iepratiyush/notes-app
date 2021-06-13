@@ -1,7 +1,7 @@
 <div [class.dark-theme]="isDark">
     <mat-toolbar [color]="'primary'">
         <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-        <span [routerLink]="['/', 'secured']" class="frame-toolbar-title">{{appName}}</span>
+        <span class="frame-toolbar-title" (click)="titleClick()">{{appName}}</span>
         <span class="frame-toolbar-spacer"></span>
 
         <button mat-icon-button (click)="toggleTheme()" [matTooltip]="isDark ? 'Switch to light mode' : 'Switch to dark mode'">

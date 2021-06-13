@@ -9,6 +9,7 @@ import { Note } from '../../shared.interface';
 })
 export class NoteCardComponent implements OnInit {
   @Input() note!: Note;
+  @Input() colorHexCode: string = '';
 
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();

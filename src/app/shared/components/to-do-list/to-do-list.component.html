@@ -9,11 +9,13 @@
                     <mat-form-field appearance="fill" [color]="'primary'" class="to-do-list-new-form">
                         <mat-label>Text</mat-label>
                         <input matInput type="text" placeholder="Type your to-do here..." formControlName="text" autocomplete="off">
+                        <mat-error *ngIf="newTodoForm.get('text')?.errors?.required">Todo is required</mat-error>
+                        <mat-error *ngIf="newTodoForm.get('text')?.errors?.minlength">Todo must be at least 3 character long</mat-error>
                     </mat-form-field>
                 </form>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color="primary" class="to-do-list-new-btn" (click)="onCreateDesktop()">Create</button>
+                <button mat-raised-button color="primary" class="to-do-list-new-btn" (click)="onCreateDesktop()" [disabled]="!newTodoForm.valid">Create</button>
             </mat-card-actions>
         </mat-card>
     </div>

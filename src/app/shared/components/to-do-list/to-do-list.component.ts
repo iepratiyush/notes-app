@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { COLORS } from '../../shared.constants';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ToDoFirebaseService } from '../../services/to-do-firebase.service';
 import { map } from 'rxjs/operators';
 import { Todo }  from '../../shared.interface';
@@ -20,7 +20,7 @@ export class ToDoListComponent implements OnInit {
   isHandset = false;
 
   newTodoForm = this.fb.group({
-    text: [''],
+    text: ['', Validators.compose([Validators.minLength(3), Validators.required])],
   });
 
   constructor(
@@ -60,7 +60,6 @@ export class ToDoListComponent implements OnInit {
         )
       ).subscribe(data => {
         this.todos = data;
-        console.log(this.todos);
       });
     }
   }
@@ -84,7 +83,6 @@ export class ToDoListComponent implements OnInit {
   }
 
   onEdit (key: any, text: any): void {
-    console.log(text);
     const dialogRef = this._dialog.open(EditDialogComponent, {
       width: '250px',
       data: text
