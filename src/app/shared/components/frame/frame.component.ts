@@ -3,7 +3,6 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColorService } from '../../services/color.service';
-import Typed from 'typed.js';
 
 @Component({
   selector: 'app-frame',

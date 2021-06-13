@@ -1,9 +1,9 @@
 {
   "targets": {
-    "notes-app-9c677": {
+    "notes-app-made-simple": {
       "hosting": {
         "notes-app": [
-          "notes-app-9c677"
+          "notes-app-made-simple"
         ]
       }
     }
