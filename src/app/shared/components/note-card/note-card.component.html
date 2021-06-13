@@ -1,6 +1,6 @@
 <mat-card class="note-card" *ngIf="note">
-    <mat-card-header class="note-title" [ngStyle]="{'background-color': colorHexCode}">
-        <mat-card-title>{{note.title | titlecase}}</mat-card-title>
+    <mat-card-header [ngStyle]="{'background-color': colorHexCode}">
+        <mat-card-title class="note-title">{{note.title | titlecase}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <span class="note-content">{{note.text}}</span>

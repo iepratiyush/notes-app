@@ -1,8 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColorService } from '../../services/color.service';
+import { FirebaseAuthService } from '../../services/firebase-auth.service';
 
 @Component({
   selector: 'app-frame',
@@ -14,13 +15,16 @@ export class FrameComponent implements OnInit {
   isDark = true;
   isHandset = false;
   appName = 'Notes App';
+  isLoggedIn = false;
+  notLoggedInMessage = 'You are not logged in!'
+  uid = '';
 
   constructor(
     private overlayContainer: OverlayContainer, 
-    private breakpointObserver: BreakpointObserver,
+    breakpointObserver: BreakpointObserver,
     private router: Router,
     private colorService: ColorService,
-    private cdr: ChangeDetectorRef
+    afAuth: FirebaseAuthService,
   ) {
     breakpointObserver.observe([
       Breakpoints.Handset
@@ -31,14 +35,23 @@ export class FrameComponent implements OnInit {
         this.isHandset = false;
       }
     });
+
+    afAuth.isLoggedIn().subscribe(value => {
+      this.isLoggedIn = !!value;
+      if (value) {
+        this.uid = value?.uid;
+      }
+    })
   }
 
   ngOnInit(): void {
+    this.colorService.getTheme().subscribe(isDark => {
+      this.isDark = isDark;
+    })
   }
 
   toggleTheme(): void {
-    this.isDark = !this.isDark;
-    this.colorService.setProfileObs(this.isDark);
+    this.colorService.setTheme(!this.isDark);
     if (this.isDark) {
       this.overlayContainer.getContainerElement().classList.add('dark-theme');
     } else {

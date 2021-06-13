@@ -23,9 +23,10 @@
         <app-to-do-card class="to-do-card" *ngFor="let todo of todos; let i = index" 
             [todo]="todo" 
             [colorHexCode]="getHexCode(i)"
-            (edit)="onEdit(todo.key, todo.text)"
+            (edit)="onEdit(todo.key, todo.text, $event)"
             (done)="onDone(todo.key)"
             (delete)="onDelete(todo.key)"
+            (undo)="onUndo(todo.key)"
         ></app-to-do-card>
     </div>
 </div>

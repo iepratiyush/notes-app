@@ -11,13 +11,16 @@ export class ToDoCardComponent implements OnInit {
   @Input() todo!: Todo;
   @Input() colorHexCode: string = '';
 
-  @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() edit: EventEmitter<String> = new EventEmitter();
   @Output() done: EventEmitter<any> = new EventEmitter();
+  @Output() undo: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
 
   isHandset = false;
+  data = '';
+  editMode = false;
 
-  constructor(breakpointObserver: BreakpointObserver) { 
+  constructor(breakpointObserver: BreakpointObserver) {
     breakpointObserver.observe([
       Breakpoints.Handset
     ]).subscribe(result => {
@@ -30,18 +33,34 @@ export class ToDoCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.todo && this.todo.text) {
+      this.data = this.todo.text
+    }
   }
 
   onEdit() {
-    this.edit.emit();
+    this.editMode = true;
   }
 
-  onDone() {
+  editCheck() {
+    this.edit.emit(this.data);
+    this.editMode = false;
+  }
+
+  editCancel() {
+    this.editMode = false;
+  }
+
+  onDone(): void {
     this.done.emit();
   }
   
-  onDelete() {
+  onDelete(): void {
     this.delete.emit();
+  }
+
+  onUndo(): void {
+    this.undo.emit();
   }
 
 }

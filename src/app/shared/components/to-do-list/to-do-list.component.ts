@@ -82,23 +82,23 @@ export class ToDoListComponent implements OnInit {
     return [...COLORS][index];
   }
 
-  onEdit (key: any, text: any): void {
-    const dialogRef = this._dialog.open(EditDialogComponent, {
-      width: '250px',
-      data: text
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result && result !== text)
-      this.todoFirebaseService.update(key, {text: result}).then(() => {
+  onEdit (key: any, text: any, newText: any): void {
+    if (newText && newText !== text) {
+      this.todoFirebaseService.update(key, {text: newText}).then(() => {
         this._snackBar.open('To do edited!!', 'Dismiss', {duration: 3000});
       });
-    });
+    }
   }
 
   onDone (key: any): void {
     this.todoFirebaseService.update(key, {completed: true}).then(() => {
       this._snackBar.open('To do completed!!', 'Dismiss', {duration: 3000});
+    });
+  }
+
+  onUndo(key: any): void {
+    this.todoFirebaseService.update(key, {completed: false}).then(() => {
+      this._snackBar.open('To do undone!!', 'Dismiss', {duration: 3000});
     });
   }
 

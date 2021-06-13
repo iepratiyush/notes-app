@@ -10,6 +10,6 @@ export class FirebaseAuthService {
   constructor(private afAuth: AngularFireAuth) { }
 
   isLoggedIn() {
-    return this.afAuth.authState.pipe(first());
+    return this.afAuth.authState;
   }
 }

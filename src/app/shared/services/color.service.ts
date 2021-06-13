@@ -5,15 +5,23 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ColorService {
-  private profileObs$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  private isDark$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  getProfileObs(): Observable<boolean> {
-      return this.profileObs$.asObservable();
+  getTheme(): Observable<boolean> {
+      return this.isDark$.asObservable();
   }
 
-  setProfileObs(isDark: boolean) {
-      this.profileObs$.next(isDark);
+  setTheme(isDark: boolean) {
+    localStorage.setItem('theme', isDark.toString());
+    this.isDark$.next(isDark);
   }
 
-  constructor() { }
+  constructor() {
+    let value = localStorage.getItem('theme');
+    if (value) {
+      this.isDark$.next(JSON.parse(value) === true);
+    } else {
+      this.isDark$.next(true);
+    }
+  }
 }

@@ -14,8 +14,11 @@
     <mat-sidenav-container class="frame-sidenav-container">
         
         <mat-sidenav #sidenav [mode]="isHandset ? 'over' : 'side'" [fixedInViewport]="isHandset" fixedTopGap="56">
-            <ngx-auth-firebaseui-user (onSignOut)="signOut()" (onAccountDeleted)="accountDeleted()"></ngx-auth-firebaseui-user>
+            <ngx-auth-firebaseui-user (onSignOut)="signOut()" (onAccountDeleted)="accountDeleted()" *ngIf="isLoggedIn; else notLoggedInState"></ngx-auth-firebaseui-user>
+            <ng-template #notLoggedInState>{{notLoggedInMessage}}</ng-template>
         </mat-sidenav>
+
+        <ng-template #notLoggedInState>{{notLoggedInMessage}}</ng-template>
         
         <mat-sidenav-content>
             

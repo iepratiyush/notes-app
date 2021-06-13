@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Note, Todo }  from '../shared.interface';
+import { Note }  from '../shared.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,12 @@ export class NotesFirebaseService {
     return this.ready.asObservable();
   }
 
-  getAll(): AngularFireList<Todo> {
+  getAll(): AngularFireList<Note> {
     return this.notesRef;
   }
 
-  create(todo: Todo): any {
-      return this.notesRef.push(todo);
+  create(note: Note): any {
+      return this.notesRef.push(note);
   }
 
   update(key: string, value: any): Promise<void> {

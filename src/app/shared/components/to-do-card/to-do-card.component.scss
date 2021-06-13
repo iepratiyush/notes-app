@@ -5,3 +5,23 @@
 .to-do-tile-completed {
   text-decoration: line-through;
 }
+
+.to-do-tile-default {
+  cursor: pointer;
+}
+
+.mat-card-header {
+  padding: 8px !important;
+}
+
+.mat-card {
+  padding: 0 !important;
+}
+
+.mat-card-content {
+  padding: 8px !important;
+}
+
+.mat-card-actions {
+  padding: 8px !important;
+}

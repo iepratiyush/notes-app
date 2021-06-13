@@ -1,13 +1,42 @@
-<mat-card class="to-do-card" *ngIf="todo" [ngStyle]="{'background-color': colorHexCode}">
+<mat-card class="to-do-card" *ngIf="todo">
+    <mat-card-header class="note-title" [ngStyle]="{'background-color': colorHexCode}">
+        <mat-card-title>&nbsp;</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
-        <span class="mat-title" [ngClass]="todo.completed ? 'to-do-tile-completed' : 'to-do-tile-default'">{{todo.text}}</span>
+        <mat-form-field *ngIf="editMode">
+            <mat-label>Text</mat-label>
+            <input 
+              type="text" 
+              placeholder="Type your to-do here..." 
+              matInput 
+              [(ngModel)]="data"
+              name="text" 
+              autocomplete="off"
+              required minlength="3"
+              #text="ngModel"
+            >
+            <button mat-icon-button matSuffix (click)="editCheck()" [disabled]="!(text.errors === null)" color="primary">
+                <mat-icon>check</mat-icon>
+            </button>
+            <button mat-icon-button matSuffix (click)="editCancel()" color="warn">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <mat-error *ngIf="text?.errors?.required">To do is required</mat-error>
+            <mat-error *ngIf="text?.errors?.minlength">To do must be at least 3 character long</mat-error>
+        </mat-form-field>
+        <span 
+            *ngIf="!editMode" 
+            class="mat-title" 
+            [ngClass]="todo.completed ? 'to-do-tile-completed' : 'to-do-tile-default'"
+            (click)="onEdit()"
+        >{{todo.text}}</span>
     </mat-card-content>
     <mat-card-actions [align]="isHandset ? 'start': 'end'">
         <button mat-icon-button aria-label="Done" *ngIf="!todo.completed" (click)="onDone()">
             <mat-icon>done</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Edit" *ngIf="!todo.completed" (click)="onEdit()">
-            <mat-icon>edit</mat-icon>
+        <button mat-icon-button aria-label="Done" *ngIf="todo.completed" (click)="onUndo()">
+            <mat-icon>undo</mat-icon>
         </button>
         <button mat-icon-button color="warn" aria-label="Delete" (click)="onDelete()">
             <mat-icon>delete_forever</mat-icon>

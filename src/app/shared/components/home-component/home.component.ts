@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthProvider } from 'ngx-auth-firebaseui';
-import { tap } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private afAuth: FirebaseAuthService) { }
 
   ngOnInit(): void {
-    this.afAuth.isLoggedIn().pipe(tap( user => {
+    this.afAuth.isLoggedIn().pipe(first(), tap( user => {
       if (user) {
         this.router.navigate(['/', 'secured']);
       }

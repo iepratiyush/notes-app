@@ -1,6 +1,7 @@
 <ngx-auth-firebaseui 
     [guestEnabled]="false"
     [providers]="[ providers.Google]"
+    [goBackURL]="'/secured'"
     (onSuccess)="success($event)"
     (onError)="error($event)"
 >

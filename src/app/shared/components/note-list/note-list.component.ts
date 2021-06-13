@@ -49,10 +49,6 @@ export class NoteListComponent implements OnInit {
         this.retrieveTodos();
       }
     })
-
-    this.newNoteForm.valueChanges.subscribe(() => {
-      console.log(this.newNoteForm);
-    })
   }
 
   retrieveTodos(): void {
