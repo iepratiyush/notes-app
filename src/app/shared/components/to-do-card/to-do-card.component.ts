@@ -38,8 +38,8 @@ export class ToDoCardComponent implements OnInit {
     }
   }
 
-  onEdit() {
-    this.editMode = true;
+  onEdit(value: boolean) {
+    this.editMode = value;
   }
 
   editCheck() {

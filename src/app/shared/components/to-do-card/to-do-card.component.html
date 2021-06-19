@@ -3,7 +3,7 @@
         <mat-card-title>&nbsp;</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-form-field *ngIf="editMode">
+        <mat-form-field *ngIf="editMode && !todo.completed">
             <mat-label>Text</mat-label>
             <input 
               type="text" 
@@ -28,7 +28,7 @@
             *ngIf="!editMode" 
             class="mat-title" 
             [ngClass]="todo.completed ? 'to-do-tile-completed' : 'to-do-tile-default'"
-            (click)="onEdit()"
+            (click)="onEdit(!todo.completed)"
         >{{todo.text}}</span>
     </mat-card-content>
     <mat-card-actions [align]="isHandset ? 'start': 'end'">

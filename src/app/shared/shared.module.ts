@@ -9,7 +9,6 @@ import { ToDoCardComponent } from './components/to-do-card/to-do-card.component'
 import { HomeComponent } from './components/home-component/home.component';
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 import { NewToDoMobileDialogComponent } from './components/new-to-do-mobile-dialog/new-to-do-mobile-dialog.component';
 import { NoteCardComponent } from './components/note-card/note-card.component';
 import { NoteListComponent } from './components/note-list/note-list.component';
@@ -22,7 +21,6 @@ import { NewNoteMobileDialogComponent } from './components/new-note-mobile-dialo
     HomeComponent,
     ToDoCardComponent,
     ToDoListComponent,
-    EditDialogComponent,
     NewToDoMobileDialogComponent,
     NoteCardComponent,
     NoteListComponent,
@@ -38,7 +36,6 @@ import { NewNoteMobileDialogComponent } from './components/new-note-mobile-dialo
     ReactiveFormsModule
   ],
   entryComponents: [
-    EditDialogComponent,
     NewToDoMobileDialogComponent,
     NewNoteMobileDialogComponent,
   ],

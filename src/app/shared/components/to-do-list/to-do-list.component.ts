@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 import { Todo }  from '../../shared.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { NewToDoMobileDialogComponent } from '../new-to-do-mobile-dialog/new-to-do-mobile-dialog.component';
 
 @Component({
